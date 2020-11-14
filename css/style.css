@@ -1,0 +1,104 @@
+.navbar-brand
+{
+    font-family: 'Secular One', sans-serif;
+    font-weight: bold;
+    font-size: xx-large;
+    position: sticky;
+}
+
+.container-fluid
+{
+    height:90vh;
+    background-image: linear-gradient(to top, #000000, #3b3b3b, #777777, #b9b9b9, #ffffff);
+    /* background-image: linear-gradient(to right, #173e78, #0d7396, #63a3a7, #b4d1c3, #fcfff6); */
+}
+
+.front-content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition-duration: 0.4s;
+}
+
+/*..start small device view css..*/
+@media screen and (min-width:0px) and (max-width:700px)
+{
+    .my-content
+    {
+        display: none;
+    }
+    .front-content
+    {
+       height:100px;
+    }
+    
+}
+/*..end small device view css..*/
+
+/*..start contact us..*/
+.wrapper
+{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.content
+{
+    padding: 25px;
+    background-color:black;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px rgb(80, 80, 79);
+}
+.content h2
+{
+   text-align: center;
+   margin-bottom: 20px;
+   text-transform: uppercase;
+   letter-spacing: 3px;
+   color:white;
+}
+.content .input_field
+{
+    margin-bottom: 10px;
+}
+.content .input_field input[type="text"],.content textarea
+{
+width:100%;
+border: 1px solid #e0e0e0;
+padding: 10px;
+border-radius: 10px;
+}
+#text_area
+{
+    height: 80px;
+    width: 300px;
+    resize: none;
+}
+.content #submit
+{
+ height: 30px;
+ width: 300px;
+ border-radius: 50px;
+ border: 1px solid #e0e0e0;
+ background: #00bf72;
+ color: #332902;
+ text-transform: uppercase;
+ letter-spacing: 3px;
+ font-weight: bold;
+ cursor: pointer;
+}
+.content #error_message
+{
+    margin-bottom: 20px;
+    padding: 0px;
+    border-radius: 10px;
+    background: #fe8b8e;
+    text-align: center;
+    font-size: 14px;
+    transition: all 0.5s ease;
+}
+/*..end contact us..*/
