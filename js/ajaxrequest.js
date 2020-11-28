@@ -178,7 +178,11 @@ function addStu(){
  }
 
 
-//Remove corses dynamically
+// course details dynamic
+ 
+
+
+//Remove courses dynamically
 
 // function remove_course()
 // {

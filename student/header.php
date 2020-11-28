@@ -51,7 +51,7 @@ if(isset($_SESSION['is_login']))
     <div class="sidebar-sticky pt-3 col-lg-2 alert alert-primary">
         <nav class="container" id="sidebarMenu">
           <ul>
-            <li><a href="#">Edit Profile</a></li>
+            <li><a href="edit_profile.php">Edit Profile</a></li>
             <li><a href="#">My Courses</a></li>
             <li><a href="#">Change Password</a></li>
             <li><a href="../student/stu_log_out.php">Log Out</a></li>

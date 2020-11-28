@@ -1,13 +1,27 @@
 <!..start of header..!>
     <?php
     include("header.php");
+    include("dbconnection.php");
+     
+    $courseId = $_GET['courseId'];
+    $sql = "SELECT * from courses WHERE course_id = '".$courseId."'";
+    $res = $conn->query($sql);
+    if($res->num_rows == 1)
+    {
+      $row = mysqli_fetch_assoc($res);
+    }
+    else
+    {
+      $status = "<div class='alert alert-danger'><small>failed to fetch</small></div>";
+    }
+
     ?>
  <!..end of header..!>
 
 <!..start course details banner..!>
 <div class="container-field bg-dark">
 <div>
-<img src="image/course_img/Guitar.jpg" alt="courses" style="height:500px; width:100%; object-fit:cover; box-shadow:10px;"/>
+<img src="<?php echo str_replace('..','.',$row['course_img'])?>" alt="courses" style="height:500px; width:100%; object-fit:cover; box-shadow:10px;"/>
 </div>
 </div>
 <!..end course details banner..!>
@@ -16,34 +30,35 @@
 <div class="container mt-5">
 <div class="row">
 <div class="col-md-4">
-  <img src="image/course_img/Guitar.jpg" alt="Guitar" class="card-img-top">
+  <img src="<?php echo str_replace('..','.',$row['course_img'])?>" alt="Guitar" class="card-img-top">
 </div>
 <div class="col-md-8">
   <div class="card-body">
     <h5 class="card-title">
-     Course Name: Learn Guitar
+     Name:<?php echo $row['course_name']?>
     </h5>
     <p class="card-text">
-     Description: Quick-start gear guide: Guitars, tuners, picks etc.
+     <strong>Definition:</strong><?php echo str_replace('..','.',$row['course_des'])?>
     </p>
     <p class="card-text">
-     Duration:10 Days
+     Number of optional definitions:3 -> NOT DYNAMIC yet.
     </p>
     <form action="" method="post">
-       <button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="buy">
-        Learn Now
+       <button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="Like">
+        Like
        </button>
     </form>
   </div>
 </div>
 </div>
+Table is NOT DYNAMIC yet.
  <div class="container">
    <div class="row">
      <table class="table table-bordered table-hover">
        <thead>
          <tr>
-           <th scope="col">Lesson No.</th>
-           <th scope="col">Lesson Name</th>
+           <th scope="col">Definition No.</th>
+           <th scope="col">Definition </th>
          </tr>
        </thead>
        <tbody>
@@ -52,7 +67,23 @@
             1
            </th>
            <td>
-             Introduction
+           C programming is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language.
+           </td>
+         </tr>
+         <tr>
+           <th scope="row">
+            2
+           </th>
+           <td>
+           C programming is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language.
+           </td>
+         </tr>
+         <tr>
+           <th scope="row">
+            3
+           </th>
+           <td>
+           C programming is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language.
            </td>
          </tr>
        </tbody>
@@ -60,6 +91,13 @@
    </div>
  </div>
 </div>
+
+<?php
+if(isset($status))
+{
+    echo $status;
+}
+?>
 <!..end course details main content..!>
 
 <!..start of student registration form..!>
