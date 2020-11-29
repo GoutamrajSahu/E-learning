@@ -76,7 +76,12 @@
     <!..end of 2nd cards div..!>
   <!..end all courses..!>
   
-
+  <?php
+if(isset($status))
+{
+    echo $status;
+}
+?>
   <!..start of student registration form..!>
          <?php 
          include("registration.php");

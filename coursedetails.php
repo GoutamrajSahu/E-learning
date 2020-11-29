@@ -2,6 +2,11 @@
     <?php
     include("header.php");
     include("dbconnection.php");
+
+    if(!isset($_SESSION))
+      {
+        session_start();
+      }
      
     $courseId = $_GET['courseId'];
     $sql = "SELECT * from courses WHERE course_id = '".$courseId."'";
@@ -14,6 +19,35 @@
     {
       $status = "<div class='alert alert-danger'><small>failed to fetch</small></div>";
     }
+     
+    //like
+    if(isset($_REQUEST['Like']))
+    {
+      if(isset($_SESSION['is_login']))
+      {
+       $stu_Email = $_SESSION['stuLogemail'];
+       $courseId = $_GET['courseId'];
+       $courseName = $row['course_name'];
+
+       $sql = "INSERT INTO liked (stu_email,course_id,course_name) VALUES ('$stu_Email','$courseId','$courseName')";
+        if($conn->query($sql)==TRUE)
+        {
+          $status = "<div class='alert alert-success'><small>like success</small></div>";
+        }
+        else
+        {
+          $status = "<div class='alert alert-primary'><small>Like update failed</small></div>";
+        }
+      }
+      else
+      {
+        $status = "<div class='alert alert-danger'><small>like failed!!!<br>Please login first.<br>If not registered then please resister then login.</small></div>";
+      }
+    }
+
+    //dislike
+    
+
 
     ?>
  <!..end of header..!>
@@ -44,9 +78,35 @@
      Number of optional definitions:3 -> NOT DYNAMIC yet.
     </p>
     <form action="" method="post">
-       <button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="Like">
-        Like
-       </button>
+       <?php
+        if(isset($_SESSION['is_login']))
+        {
+          $stu_Email = $_SESSION['stuLogemail'];
+          $courseId = $_GET['courseId'];
+          $sql = "SELECT * FROM liked WHERE stu_email = '".$stu_Email."' AND course_id = '".$courseId."'";
+          
+          $res = $conn->query($sql);
+          $rows = $res->num_rows;
+          if($rows == 1)
+            {
+              echo '<button type="submit" class="btn btn-warning text-white font-weight-bolder float-right" name="DisLike">
+              Dislike
+            </button>';
+            }
+            else
+            {
+              echo '<button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="Like">
+              Like
+            </button>';
+            }
+        }
+        else
+        {
+          echo '<button type="submit" class="btn btn-primary text-white font-weight-bolder float-right" name="Like">
+          Like
+         </button>';
+        }
+       ?>
     </form>
   </div>
 </div>
